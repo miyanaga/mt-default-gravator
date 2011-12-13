@@ -28,7 +28,10 @@ sub init_app {
     *MT::Author::userpic_url = sub {
         my ( $author, %param ) = @_;
         my @info = $userpic_url->(@_) if wantarray;
-        return wantarray? @info: $info[0] if $info[0]; # Userpic uploaded.
+        if ( $info[0] ) {
+            # Userpic uploaded.
+            return wantarray? @info: $info[0];
+        }
 
         # Build Gravator url.
         my $size = $param{Width} || 90;
@@ -50,10 +53,9 @@ sub init_app {
     # Redfine MT::Author::userpic_html to return Gravator for user editing screen.
     my $userpic_html = \&MT::Author::userpic_html;
     *MT::Author::userpic_html = sub {
-        my ( $author ) = @_;
+        my $url = $userpic_url->(@_);
 
-        # Assume Gravator url is as not defined.
-        my $url = $author->userpic_url(@_);
+        # Assume Gravator URL as is not defined userpic.
         return if $url =~ m!^$base_url!i;
 
         # Run the original.
