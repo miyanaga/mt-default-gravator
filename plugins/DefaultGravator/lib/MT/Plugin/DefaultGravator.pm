@@ -56,7 +56,7 @@ sub init_app {
         my $url = $userpic_url->(@_);
 
         # Assume Gravator URL as is not defined userpic.
-        return if $url =~ m!^$base_url!i;
+        return if !$url;
 
         # Run the original.
         $userpic_html->(@_);
