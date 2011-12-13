@@ -1,0 +1,16 @@
+name: Default Gravator
+author_name: Kunihiko Miyanaga@ideaman's Inc.
+author_link: http://www.ideamans.com/
+description: User Gravator if userpic is not uploaded.
+version: 0.1
+
+callbacks:
+    init_app: $DefaultGravator::MT::Plugin::DefaultGravator::init_app
+
+config_settings:
+    DefaultGravatorBaseURL:
+        default: //www.gravatar.com/avatar/
+    DefaultGravatorDefaultImage:
+        default: mt
+    DefaultGravatorRating:
+        default:
